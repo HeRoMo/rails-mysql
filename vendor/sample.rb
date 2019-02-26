@@ -1,9 +1,12 @@
 # load 'vendor/sample.rb'
 
+def del_all
+  Task.destroy_all
+  Member.destroy_all
+  Project.destroy_all
+end
+
 def sample
-  Task.delete_all
-  Member.delete_all
-  Project.delete_all
   project = Project.create(name: 'プロジェクト①');
   member1 = Member.create(name: 'メンバー①')
 
