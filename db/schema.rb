@@ -12,23 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2019_02_24_092103) do
 
-  create_table "members", id: :string, limit: 36, comment: "プライマリキー", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "メンバー", force: :cascade do |t|
+  create_table "members", id: :string, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", comment: "メンバー", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "members_tasks", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "タスクとメンバーの関連テーブル", force: :cascade do |t|
-    t.string "member_id"
-    t.string "task_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["member_id"], name: "index_members_tasks_on_member_id"
-    t.index ["task_id"], name: "index_members_tasks_on_task_id"
-  end
-
-  create_table "projects", id: :string, limit: 36, comment: "プライマリキー", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "プロジェクト", force: :cascade do |t|
+  create_table "projects", id: :string, limit: 36, comment: "プライマリキー", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", comment: "プロジェクト", force: :cascade do |t|
     t.string "name", null: false, comment: "プロジェクト名"
     t.text "description", comment: "概要"
     t.date "start_on", comment: "開始日"
@@ -37,7 +28,7 @@ ActiveRecord::Schema.define(version: 2019_02_24_092103) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "tasks", id: :string, limit: 36, comment: "プライマリキー", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "tasks", id: :string, limit: 36, comment: "プライマリキー", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "project_id"
     t.string "name", null: false
     t.text "description", comment: "概要"
@@ -49,7 +40,5 @@ ActiveRecord::Schema.define(version: 2019_02_24_092103) do
     t.index ["project_id"], name: "index_tasks_on_project_id"
   end
 
-  add_foreign_key "members_tasks", "members"
-  add_foreign_key "members_tasks", "tasks"
   add_foreign_key "tasks", "projects"
 end

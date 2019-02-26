@@ -1,5 +1,4 @@
 class Member < ApplicationRecord
-  include IdGenerator
-
+  after_create ->{reload}
   has_and_belongs_to_many :tasks
 end
